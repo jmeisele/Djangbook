@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from . models import Group, GroupMembers
 
@@ -10,6 +10,10 @@ from . models import Group, GroupMembers
 class CreateGroup(LoginRequiredMixin, generic.CreateView):
     fields = ('name', 'description')
     model = Group
+    # form_class = forms.UserCreateForm
+    # Does not execute until submit done on form
+    success_url = reverse_lazy('list_groups')
+    # template_name = 'accounts/signup.html'
 
 
 class SingleGroup(generic.DetailView):
@@ -18,3 +22,4 @@ class SingleGroup(generic.DetailView):
 
 class ListGroups(generic.ListView):
     model = Group
+    success_url = reverse_lazy('list_groups')

@@ -40,7 +40,7 @@ class GroupMembers(models.Model):
         User, related_name='user_groups', on_delete='cascade')
 
     def __str__(self):
-        return self.user.username
+        return self.user.name
 
     class Meta:
         unique_together = ('group', 'user')
