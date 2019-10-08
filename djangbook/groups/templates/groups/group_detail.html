@@ -21,7 +21,7 @@
             <h2>No posts in this group yet</h2>
         {% else %}
             {% for post in group.posts.all %}
-                {% include 'posts/_post.html' %}
+                {% include 'posts/_post.html' %}  <!-- Include keyword is the same as extends but you can use it to inject -->
             {% endfor%}
         {% endif %}
     </div>

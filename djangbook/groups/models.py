@@ -12,7 +12,7 @@ register = template.Library()
 class Group(models.Model):
     name = models.CharField(max_length=255, unique = True)
     slug = models.SlugField(allow_unicode = True, unique = True)
-    decription = models.TextField(blank = True, default = '')
+    description = models.TextField(blank = True, default = '')
     description_html = models.TextField(editable = False, default = '', blank = True)
     members = models.ManyToManyField(User, through = 'GroupMember')
 
