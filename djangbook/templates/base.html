@@ -25,10 +25,10 @@
                 <a class='navbar-brand mynav' href="{% url 'index' %}">DjangBook</a>
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                            <li><a href="#"></a>Post</li>
-                            <li><a href="#"></a>Groups</li>
-                            <li><a href="#"></a>Create Group</li>
-                            <li><a href="{% url 'accounts:logout' %}"></a>Logout</li>
+                            <li><a href="#">Post</a></li>
+                            <li><a href="#">Groups</a></li>
+                            <li><a href="#">Create Group</a></li>
+                            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                         {% else %}
                             <li><a href="">Groups</a></li>
                             <li><a href="{% url 'accounts:login' %}">Login</a></li>
