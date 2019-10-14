@@ -1,5 +1,6 @@
 from django import template
 from django.db import models
+
 # Allows removal of characters that aren't alphanumeric
 from django.utils.text import slugify
 from django.urls import reverse
@@ -35,7 +36,7 @@ class Group(models.Model):
 
 class GroupMembers(models.Model):
     group = models.ForeignKey(
-        Group, related_name='memberships', on_delete='cascade')
+        Group, related_name='memberships', on_delete='cascade') #related_name argument names the link between the two fields
     user = models.ForeignKey(
         User, related_name='user_groups', on_delete='cascade')
 
