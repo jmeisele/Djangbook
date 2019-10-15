@@ -22,7 +22,7 @@ urlpatterns = [
     path('', views.HomePage.as_view(), name='index'),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('test/', views.TestPage.as_view(), name='test'),
+    path('loggedin/', views.LoggedIn.as_view(), name='test'),
     path('thanks/', views.ThanksPage.as_view(), name='thanks'),
     path('groups/', include('groups.urls', namespace='groups')),
     path('posts/', include('posts.urls', namespace='posts')),

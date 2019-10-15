@@ -1,4 +1,5 @@
 from django.shortcuts import render
+# from groups import models
 
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -12,17 +13,12 @@ from django.contrib import messages
 class CreateGroup(LoginRequiredMixin, generic.CreateView):
     fields = ('name', 'description') #Fields they are able to create
     model = Group
-    # form_class = forms.UserCreateForm
-    # Does not execute until submit done on form
-    # success_url = reverse_lazy('list_groups')
-    # template_name = 'accounts/signup.html'
 
 class SingleGroup(generic.DetailView):
     model = Group
 
 class ListGroups(generic.ListView):
     model = Group
-    # success_url = reverse('list_groups')
     success_url = reverse_lazy('list_groups')
 
     def get_queryset(self):
@@ -51,8 +47,8 @@ class LeaveGroup(LoginRequiredMixin, generic.RedirectView):
 
     def get(self, request, *args, **kwargs):
         try:
-            membership = models.GroupMembers.objects.filter(user = self.request.user, group__slug=self.kwargs.get('slug')).get()
-        except models.GroupMembers.DoesNotExist:
+            membership = GroupMembers.objects.filter(user = self.request.user, group__slug=self.kwargs.get('slug')).get()
+        except GroupMembers.DoesNotExist:
             messages.warning(self.request, 'Sorry you are not in this group')
         else:
             membership.delete()
