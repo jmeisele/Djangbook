@@ -1,0 +1,30 @@
+name: djangbook
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - ca-certificates=2019.8.28=0
+  - certifi=2019.9.11=py37_0
+  - cffi=1.12.3=py37hb32ad35_0
+  - django=2.2.6=py37_0
+  - django-bootstrap3=11.1.0=py_0
+  - django-braces=1.13.0=py_1
+  - misaka=2.1.1=py37hfa6e2cd_0
+  - openssl=1.1.1d=he774522_2
+  - pip=19.2.3=py37_0
+  - pycparser=2.19=py37_1
+  - python=3.7.3=h510b542_1
+  - pytz=2019.3=py_0
+  - setuptools=41.4.0=py37_0
+  - sqlite=3.29.0=he774522_0
+  - sqlparse=0.3.0=py_0
+  - vc=14.1=h0510ff6_4
+  - vs2015_runtime=14.16.27012=hf0eaf9b_0
+  - wheel=0.33.6=py37_0
+  - wincertstore=0.2=py37_1002
+  - pip:
+    - beautifulsoup4==4.8.1
+    - soupsieve==1.9.4
+prefix: C:\Users\eiselja\.conda\envs\djangbook
+
