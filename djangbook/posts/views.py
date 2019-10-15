@@ -7,19 +7,17 @@ from django.http import Http404
 from braces.views import SelectRelatedMixin
 
 # Create your views here.
-from . import models
+from posts.models import Post
 from . import forms
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-
 class PostList(SelectRelatedMixin, generic.ListView):
-    model = models.Post
+    model = Post
     select_related = ('user', 'group')
 
-
 class UserPosts(generic.ListView):
-    model = models.Post
+    model = Post
     template_name = 'posts/user_post_list.html'
 
     def get_queryset(self):
@@ -38,17 +36,17 @@ class UserPosts(generic.ListView):
 
 
 class PostDetail(SelectRelatedMixin, generic.DetailView):
-    model = models.Post
+    model = Post
     select_related = ('user', 'group')
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user__username__iexact=self.kwargs.get)('username')
+        return queryset.filter(user__username__iexact=self.kwargs.get('username'))
 
 
 class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
     fields = ('message', 'group')
-    model = models.Post
+    model = Post
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -56,9 +54,8 @@ class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
         self.object.save()
         return super().form_valid(form)
 
-
 class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
-    model = models.Post
+    model = Post
     select_related = ('user', 'group')
     success_url = reverse_lazy('posts:all')
 
