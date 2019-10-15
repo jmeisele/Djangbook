@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.http import Http404
 from braces.views import SelectRelatedMixin
@@ -22,8 +22,7 @@ class UserPosts(generic.ListView):
 
     def get_queryset(self):
         try:
-            self.post_user = User.objects.prefetch_related('posts').get(
-                username__iexact=self.kwargs.get('username'))
+            self.post_user = User.objects.prefetch_related('posts').get(username__iexact=self.kwargs.get('username'))
         except User.DoesNotExist:
             raise Http404
         else:
@@ -34,7 +33,6 @@ class UserPosts(generic.ListView):
         context['post_user'] = self.post_user
         return context
 
-
 class PostDetail(SelectRelatedMixin, generic.DetailView):
     model = Post
     select_related = ('user', 'group')
@@ -42,7 +40,6 @@ class PostDetail(SelectRelatedMixin, generic.DetailView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(user__username__iexact=self.kwargs.get('username'))
-
 
 class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
     fields = ('message', 'group')
