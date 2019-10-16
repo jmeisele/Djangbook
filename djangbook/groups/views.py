@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.db import IntegrityError
-from groups.models import Group, GroupMembers
+from groups.models import Group, GroupMember
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
@@ -33,7 +33,7 @@ class JoinGroup(LoginRequiredMixin, generic.RedirectView):
         group = get_object_or_404(Group, slug=self.kwargs.get('slug'))
         
         try:
-            GroupMembers.objects.create(user=self.request.user, group=group)
+            GroupMember.objects.create(user=self.request.user, group=group)
         except IntegrityError:
             messages.warning(self.request,'Warning already a member!')
         else:
@@ -47,10 +47,10 @@ class LeaveGroup(LoginRequiredMixin, generic.RedirectView):
 
     def get(self, request, *args, **kwargs):
         try:
-            membership = GroupMembers.objects.filter(user = self.request.user, group__slug=self.kwargs.get('slug')).get()
-        except GroupMembers.DoesNotExist:
+            membership = GroupMember.objects.filter(user = self.request.user, group__slug=self.kwargs.get('slug')).get()
+        except GroupMember.DoesNotExist:
             messages.warning(self.request, 'Sorry you are not in this group')
         else:
             membership.delete()
-            messages.success(self.request, 'You have lefgt the group')
+            messages.success(self.request, 'You have left the group')
         return super().get(request, *args, **kwargs)

@@ -17,7 +17,7 @@ class Group(models.Model):
     slug = models.SlugField(allow_unicode=True, unique=True)
     description = models.TextField(blank=True, default='')
     description_html = models.TextField(editable=False, default='', blank=True)
-    members = models.ManyToManyField(User, through='GroupMembers')
+    members = models.ManyToManyField(User, through='GroupMember')
 
     def __str__(self):
         return self.name
@@ -34,7 +34,7 @@ class Group(models.Model):
         ordering = ['name']
 
 
-class GroupMembers(models.Model):
+class GroupMember(models.Model):
     group = models.ForeignKey(
         Group, related_name='memberships', on_delete='cascade') #related_name argument names the link between the two fields
     user = models.ForeignKey(
