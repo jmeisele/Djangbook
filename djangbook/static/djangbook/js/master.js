@@ -1,6 +1,6 @@
 // SOURCE: http://codepen.io/Thibka/pen/mWGxNj
-var canvas = document.getElementById('canvas'),
-  context = canvas.getContext('2d'),
+var canvas = document.getElementById("canvas"),
+  context = canvas.getContext("2d"),
   canvasWidth = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth),
   canvasHeight = (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight),
   requestAnimationFrame = window.requestAnimationFrame ||
@@ -14,11 +14,11 @@ var persons = [],
 var colors = [];
 /* Galactic Tea - http://www.colourlovers.com/palette/1586746/Galactic_Tea*/
 colors[2] = [];
-colors[2]['background'] = '#2F294F';
-colors[2][1] = 'rgba(74,49,89,';
-colors[2][2] = 'rgba(130,91,109,';
-colors[2][3] = 'rgba(185,136,131,';
-colors[2][4] = 'rgba(249,241,204,';
+colors[2]["background"] = "#2F294F";
+colors[2][1] = "rgba(74,49,89,";
+colors[2][2] = "rgba(130,91,109,";
+colors[2][3] = "rgba(185,136,131,";
+colors[2][4] = "rgba(249,241,204,";
 
 var colorTheme = 2, //getRandomInt(0,colors.length-1);
   mainSpeed = 1;
@@ -26,7 +26,7 @@ var colorTheme = 2, //getRandomInt(0,colors.length-1);
 function getRandomInt(min, max, exept) {
   var i = Math.floor(Math.random() * (max - min + 1)) + min;
   if (typeof exept == "undefined") return i;
-  else if (typeof exept == 'number' && i == exept) return getRandomInt(min, max, exept);
+  else if (typeof exept == "number" && i == exept) return getRandomInt(min, max, exept);
   else if (typeof exept == "object" && (i >= exept[0] && i <= exept[1])) return getRandomInt(min, max, exept);
   else return i;
 }
@@ -151,8 +151,8 @@ Firefly.prototype.die = function() {
 }
 
 window.onload = function() {
-  canvas.setAttribute('width', canvasWidth);
-  canvas.setAttribute('height', canvasHeight);
+  canvas.setAttribute("width", canvasWidth);
+  canvas.setAttribute("height", canvasHeight);
 
   start();
 }
@@ -175,14 +175,14 @@ function animate() {
 
   context.beginPath();
 
-  // Création d'une copie de l'array persons
+  // Création d"une copie de l"array persons
   persons_order = persons.slice(0);
-  // Tri par ordre de position sur l'axe y (afin de gérer les z-index)
+  // Tri par ordre de position sur l"axe y (afin de gérer les z-index)
   persons_order.sort(function(a, b) {
     return a.y - b.y
   });
 
-  // Paint les instances dans l'ordre trié
+  // Paint les instances dans l"ordre trié
   for (var i in persons_order) {
     var u = persons_order[i].id;
     persons[u].walk();
